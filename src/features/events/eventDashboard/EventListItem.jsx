@@ -10,7 +10,7 @@ import EventListAttendee from "./EventListAttendee";
 const EventListItem = ({ event, selectEvent, deleteEvent }) => {
   return (
     <>
-      <Segment.Group style={{ marginBottom: "0.2rem" }}>
+      <Segment.Group style={{ marginBottom: "0.2rem" }} className="event">
         <Segment>
           <Item.Group>
             <Item>
