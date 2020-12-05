@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, Container, Button } from 'semantic-ui-react';
+import SignedInMenu from './SignedInMenu';
+import SignedOutMenu from './SignedOutMenu';
 
 /*
 1. Display: Menu component - the semantic-ui-react component is used to wrap the navbar menu items
@@ -20,10 +22,8 @@ const NavBar = ({setFormOpen}) => {
                 <Menu.Item as={NavLink} exact to='/events/create'>
                     <Button positive inverted content='Create Event' />
                 </Menu.Item>
-                <Menu.Item position='right'>
-                    <Button basic inverted content='Sign in' />
-                    <Button basic inverted content='Register' style={{marginLeft: '0.5rem'}}/>
-                </Menu.Item>
+                <SignedOutMenu />
+                <SignedInMenu />
             </Container>
         </Menu>
     )
