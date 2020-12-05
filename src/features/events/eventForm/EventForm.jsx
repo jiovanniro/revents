@@ -1,5 +1,6 @@
 import cuid from "cuid";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Segment, Header, Form, Button } from "semantic-ui-react";
 
 /*
@@ -8,7 +9,7 @@ import { Segment, Header, Form, Button } from "semantic-ui-react";
 3. Display: Form component - the semantic-ui-react component is used to provide a form element on the page
 */
 
-const EventForm = ({ setFormOpen, createEvent, selectedEvent, updateEvent }) => {
+const EventForm = ({ createEvent, selectedEvent, updateEvent }) => {
 
   //null conditional operator
   //set values to selectedEvent if its not null
@@ -103,7 +104,7 @@ const EventForm = ({ setFormOpen, createEvent, selectedEvent, updateEvent }) => 
         </Form.Field>
         <Button type='submit' floated='right' positive content='Submit' />
         <Button
-          onClick={(e) => setFormOpen(false)}
+          as={Link} to='/events'
           type='submit'
           floated='right'
           content='Cancel'

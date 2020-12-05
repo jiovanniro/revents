@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 
 import NavBar from "../../features/nav/NavBar";
 import HomePage from "../../features/home/HomePage";
 import EventsDashboard from "../../features/events/eventDashboard/EventDashboard";
-import EventDetail from "../../features/events/eventDetail/EventDetail";
+import EventDetail from "../../features/events/eventDetail/EventDetailPage";
 import EventForm from "../../features/events/eventForm/EventForm";
 
 /*
@@ -17,18 +17,6 @@ import EventForm from "../../features/events/eventForm/EventForm";
 */
 
 const App = () => {
-  const [formOpen, setFormOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
-  const handleSelectedEvent = (e) => {
-    setSelectedEvent(e);
-    setFormOpen(true);
-  };
-
-  const handleCreateFormOpen = (e) => {
-    setSelectedEvent(null);
-    setFormOpen(true);
-  };
 
   return (
     <>
@@ -37,10 +25,10 @@ const App = () => {
         path={"/(.+)"}
         render={() => (
           <>
-            <NavBar setFormOpen={handleCreateFormOpen} />
+            <NavBar />
             <Container className='main'>
               <Route exact path='/events' component={EventsDashboard} />
-              <Route exact path='/events/create' component={EventForm} />
+              <Route exact path={['/events/create', 'events/manage/:id']} component={EventForm} />
               <Route exact path='/events/view/:id' component={EventDetail} />
             </Container>
           </>
@@ -51,12 +39,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <EventsDashboard
-formOpen={formOpen}
-setFormOpen={setFormOpen}
-selectEvent={handleSelectedEvent}
-selectedEvent={selectedEvent}
-/> */
-}
