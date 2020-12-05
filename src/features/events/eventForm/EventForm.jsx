@@ -2,6 +2,12 @@ import cuid from "cuid";
 import React, { useState } from "react";
 import { Segment, Header, Form, Button } from "semantic-ui-react";
 
+/*
+1. Function: handleFormSubmit - if a current event was selected then display the event details, otherwise display an empty form
+2. Function: handleInputChange - used to track changes made in the input fields. event is passed as an argument, then the state is updated to include the changes made
+3. Display: Form component - the semantic-ui-react component is used to provide a form element on the page
+*/
+
 const EventForm = ({ setFormOpen, createEvent, selectedEvent, updateEvent }) => {
 
   //null conditional operator

@@ -2,6 +2,11 @@ import React from "react";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import EventListAttendee from "./EventListAttendee";
 
+/*
+1. Display: Segment component - the semantic-ui-react component is used to provide group / card like layout for the event details
+2. Display: Button component - the semantic-ui-react component is used display a button that will be used for viewing and deleting the event
+*/
+
 const EventListItem = ({ event, selectEvent, deleteEvent }) => {
   return (
     <>

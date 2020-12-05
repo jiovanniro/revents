@@ -1,6 +1,12 @@
 import React from 'react';
 import { Menu, Container, Button } from 'semantic-ui-react';
 
+/*
+1. Display: Menu component - the semantic-ui-react component is used to wrap the navbar menu items
+2. Display: Container component - the semantic-ui-react component is used to wrapper to help position the menu items
+3. Display: Button component - the semantic-ui-react component is used display a button that will be used for sign in and registration
+*/
+
 const NavBar = ({setFormOpen}) => {
     return (
         <Menu inverted fixed='top'>

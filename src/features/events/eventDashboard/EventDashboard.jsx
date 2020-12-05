@@ -5,6 +5,14 @@ import EventLists from "./EventLists";
 import EventForm from "../eventForm/EventForm";
 import { sampleData } from "../../../app/api/sampleData";
 
+/*
+1. Function: handleCreateEvent - event is passed as an argument, then the state is updated to include the new state
+1. Function: handleUpdateEvent - event is passed as an argument, then the state is updated to reflect the changes, selectEvent is set to null and form is closed
+3. Display: Grid component - the semantic-ui-react component is used to provide a grid layout (grid of 16)
+4. Display: EventLists component - events, selectEvent, and deleteEvent are passed down as a prop
+5. Display: EventForm component - setFormOpen, setEvents, createEvent, selectedEvent, and updateEvent are passed down as a prop
+*/
+
 const EventsDashboard = ({
   formOpen,
   setFormOpen,
@@ -14,7 +22,6 @@ const EventsDashboard = ({
   const [events, setEvents] = useState(sampleData);
 
   const handleCreateEvent = (e) => {
-    console.log(e);
     setEvents([...events, e]);
   };
 
