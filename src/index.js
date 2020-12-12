@@ -5,13 +5,21 @@ import './app/layout/styles.css';
 import App from './app/layout/App.jsx';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import configStore from './app/store/configStore';
+import ScrollToTop from './app/layout/ScrollToTop';
 
+const store = configStore();
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>  
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+    <ScrollToTop />
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>  
+    </BrowserRouter>  
+  </Provider>,
+
   document.getElementById('root')
 );
 

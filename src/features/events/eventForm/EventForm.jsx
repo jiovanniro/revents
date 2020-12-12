@@ -1,7 +1,10 @@
 import cuid from "cuid";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Header, Form, Button } from "semantic-ui-react";
+
+import { createEvent, updateEvent } from "../eventActions";
 
 /*
 1. Function: handleFormSubmit - if a current event was selected then display the event details, otherwise display an empty form
@@ -10,7 +13,11 @@ import { Segment, Header, Form, Button } from "semantic-ui-react";
 
 */
 
-const EventForm = ({ createEvent, selectedEvent, updateEvent }) => {
+const EventForm = ({ match, history }) => {
+  const selectedEvent = useSelector((state) =>
+    state.events_reducer.events.find((e) => e.id === match.params.id)
+  );
+  const dispatch = useDispatch();
 
   //null conditional operator
   //set values to selectedEvent if its not null
@@ -27,14 +34,18 @@ const EventForm = ({ createEvent, selectedEvent, updateEvent }) => {
 
   const handleFormSubmit = () => {
     //if there is a selectedEvent then we'll update the event otherwise, we'll create a new event
-    selectedEvent ? updateEvent({...selectedEvent, ...values}) :
-    createEvent({
-      ...values,
-      id: cuid(),
-      hostedBy: 'Jose',
-      attendee: [],
-      hostPhotoURL: '/assets/user.png',
-    });
+    selectedEvent
+      ? dispatch(updateEvent({ ...selectedEvent, ...values }))
+      : dispatch(
+          createEvent({
+            ...values,
+            id: cuid(),
+            hostedBy: "Jose",
+            attendee: [],
+            hostPhotoURL: "/assets/user.png",
+          })
+        );
+    history.push("/events");
   };
 
   const handleInputChange = (e) => {
@@ -47,7 +58,7 @@ const EventForm = ({ createEvent, selectedEvent, updateEvent }) => {
 
   return (
     <Segment clearing>
-      <Header content={selectedEvent ? 'Edit the event': 'Create new event' } />
+      <Header content={selectedEvent ? "Edit the event" : "Create new event"} />
       <Form onSubmit={handleFormSubmit}>
         <Form.Field>
           <input
@@ -105,7 +116,8 @@ const EventForm = ({ createEvent, selectedEvent, updateEvent }) => {
         </Form.Field>
         <Button type='submit' floated='right' positive content='Submit' />
         <Button
-          as={Link} to='/events'
+          as={Link}
+          to='/events'
           type='submit'
           floated='right'
           content='Cancel'

@@ -37,6 +37,7 @@ const NavBar = ({ setFormOpen }) => {
           Revents
         </Menu.Item>
         <Menu.Item as={NavLink} exact to='/events' name='Events' />
+        <Menu.Item as={NavLink} exact to='/sandbox' name='Sandbox' />
         {auth && (
           <Menu.Item as={NavLink} exact to='/events/create'>
             <Button positive inverted content='Create Event' />

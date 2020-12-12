@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Item } from "semantic-ui-react";
 
-const EventDetailSidebar = () => {
+const EventDetailSidebar = ({ attendees }) => {
   return (
     <>
       <Segment
@@ -12,26 +12,28 @@ const EventDetailSidebar = () => {
         inverted
         color='teal'
       >
-        2 People Going
+        {attendees && attendees.length > 0
+          ? `${attendees.length} People Going`
+          : `${attendees.length} Person Going`}
       </Segment>
       <Segment attached>
         <Item.Group relaxed divided>
-          <Item style={{ position: "relative" }}>
-            <Item.Image size='tiny' src='/assets/user.png' />
-            <Item.Content verticalAlign='middle'>
-              <Item.Header as='h3'>
-                <span>Tom</span>
-              </Item.Header>
-            </Item.Content>
-          </Item>
-          <Item style={{ position: "relative" }}>
-            <Item.Image size='tiny' src='/assets/user.png' />
-            <Item.Content verticalAlign='middle'>
-              <Item.Header as='h3'>
-                <span>Bob</span>
-              </Item.Header>
-            </Item.Content>
-          </Item>
+          {attendees &&
+            attendees.map((attendee) => {
+              return (
+                <Item key={attendee.id} style={{ position: "relative" }}>
+                  <Item.Image
+                    size='tiny'
+                    src={attendee.photoURL || "/assets/user.png"}
+                  />
+                  <Item.Content verticalAlign='middle'>
+                    <Item.Header as='h3'>
+                      <span>{attendee.name}</span>
+                    </Item.Header>
+                  </Item.Content>
+                </Item>
+              );
+            })}
         </Item.Group>
       </Segment>
     </>

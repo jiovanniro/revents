@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Grid } from "semantic-ui-react";
 import EventLists from "./EventLists";
-import { sampleData } from "../../../app/api/sampleData";
+import { useSelector } from "react-redux";
 
 /*
 1. Function: handleCreateEvent - event is passed as an argument, then the state is updated to include the new state
@@ -13,24 +13,12 @@ import { sampleData } from "../../../app/api/sampleData";
 */
 
 const EventsDashboard = () => {
-  const [events, setEvents] = useState(sampleData);
-
-  // const handleCreateEvent = (e) => {
-  //   setEvents([...events, e]);
-  // };
-
-  // const handleUpdateEvent = (updatedEvent) => {
-  //     setEvents(events.map(evt => evt.id === updatedEvent.id ? updatedEvent : evt));
-  // }
-
-  const handleDeleteEvent = (eventID) => {
-    setEvents(events.filter(evt => evt.id !== eventID));
-  }
+  const { events } = useSelector((state) => state.events_reducer);
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventLists events={events} deleteEvent={handleDeleteEvent} />
+        <EventLists events={events} />
       </Grid.Column>
       <Grid.Column width={6}>
         <h2>Event Filters</h2>

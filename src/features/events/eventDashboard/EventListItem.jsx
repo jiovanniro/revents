@@ -1,17 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
 import EventListAttendee from "./EventListAttendee";
 
+import { deleteEvent } from "../eventActions";
 /*
 1. Display: Segment component - the semantic-ui-react component is used to provide group / card like layout for the event details
 2. Display: Button component - the semantic-ui-react component is used display a button that will be used for viewing and deleting the event
 */
 
-const EventListItem = ({ event, selectEvent, deleteEvent }) => {
+const EventListItem = ({ event }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Segment.Group style={{ marginBottom: "0.2rem" }} className="event">
+      <Segment.Group style={{ marginBottom: "0.2rem" }} className='event'>
         <Segment>
           <Item.Group>
             <Item>
@@ -45,10 +49,11 @@ const EventListItem = ({ event, selectEvent, deleteEvent }) => {
             color='red'
             floated='right'
             content='Delete'
-            onClick={() => deleteEvent(event.id)}
+            onClick={() => dispatch(deleteEvent(event.id))}
           />
           <Button
-            as={Link} to={`/events/view/${event.id}`}
+            as={Link}
+            to={`/events/view/${event.id}`}
             color='teal'
             floated='right'
             content='View'

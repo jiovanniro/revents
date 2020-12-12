@@ -1,12 +1,13 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import { Route } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 
 import NavBar from "../../features/nav/NavBar";
 import HomePage from "../../features/home/HomePage";
 import EventsDashboard from "../../features/events/eventDashboard/EventDashboard";
 import EventDetail from "../../features/events/eventDetail/EventDetailPage";
 import EventForm from "../../features/events/eventForm/EventForm";
+import Sandbox from "../playground/Sandbox";
 
 /*
 1. Function: handleSelectedEvent - event is passed as an argument, then the state is updated and the form is opened with the event details
@@ -17,6 +18,7 @@ import EventForm from "../../features/events/eventForm/EventForm";
 */
 
 const App = () => {
+  const {key} = useLocation();
 
   return (
     <>
@@ -28,8 +30,9 @@ const App = () => {
             <NavBar />
             <Container className='main'>
               <Route exact path='/events' component={EventsDashboard} />
-              <Route exact path={['/events/create', 'events/manage/:id']} component={EventForm} />
+              <Route exact path={['/events/create', '/events/manage/:id']} component={EventForm} key={key} />
               <Route exact path='/events/view/:id' component={EventDetail} />
+              <Route exact path='/sandbox' component={Sandbox} />
             </Container>
           </>
         )}
